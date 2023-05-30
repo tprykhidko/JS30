@@ -1,8 +1,4 @@
 function lifetime(born, passed) {
-  console.log(born);
-  console.log(passed);
-  console.log(passed - born);
-
   return passed - born;
 }
 
@@ -12,42 +8,54 @@ const inventors = [
     last: "Einstein",
     year: 1879,
     passed: 1955,
-    live: lifetime(this.year, this.passed),
+    live: function () {
+      return lifetime(this.year, this.passed);
+    },
   },
   {
     first: "Isaac",
     last: "Newton",
     year: 1643,
     passed: 1727,
-    live: lifetime(this.year, this.passed),
+    live: function () {
+      return lifetime(this.year, this.passed);
+    },
   },
   {
     first: "Galileo",
     last: "Galilei",
     year: 1564,
     passed: 1642,
-    live: lifetime(this.year, this.passed),
+    live: function () {
+      return lifetime(this.year, this.passed);
+    },
   },
   {
     first: "Marie",
     last: "Curie",
     year: 1867,
     passed: 1934,
-    live: lifetime(this.year, this.passed),
+    live: function () {
+      return lifetime(this.year, this.passed);
+    },
   },
   {
     first: "Johannes",
     last: "Kepler",
     year: 1571,
     passed: 1630,
-    live: lifetime(this.year, this.passed),
+    live: function () {
+      return lifetime(this.year, this.passed);
+    },
   },
   {
     first: "Nicolaus",
     last: "Copernicus",
     year: 1473,
     passed: 1543,
-    live: lifetime(this.year, this.passed),
+    live: function () {
+      return lifetime(this.year, this.passed);
+    },
   },
 ];
 
@@ -95,8 +103,7 @@ const people = [
   "Blake, William",
 ];
 
-const livetime = inventors.map((inventor) => inventor.live);
-//const liveArr = inventors.map((inventor) => inventor.live());
+const livetime = inventors.map((inventor) => inventor.live());
 console.table(livetime);
 
 // Array.prototype.filter()
@@ -119,7 +126,7 @@ console.table(ordered);
 const totalYears = inventors.reduce((total, inventor) => {
   return total + (inventor.passed - inventor.year);
 }, 0);
-console.log(totalYears);
+console.log("totalYears", totalYears);
 
 // Sort the inventors by years lived
 const oldest = inventors.sort(function (a, b) {
@@ -129,13 +136,40 @@ const oldest = inventors.sort(function (a, b) {
 });
 console.table(oldest);
 
-let test = {
-  a: 10,
-  b: 20,
-  sum: function () {
-    return this.a + this.b;
-  },
-};
+// Sort exercise
+console.log("people", people);
+const alpha = people.sort((lastOne, nextOne) => {
+  const [aLast, aFirst] = lastOne.split(", ");
+  const [bLast, bFirst] = nextOne.split(", ");
+  return aLast > bLast ? 1 : -1;
+});
 
-console.log(test);
-console.log(test.sum());
+//Reduce exercise
+const data = [
+  "car",
+  "car",
+  "truck",
+  "truck",
+  "bike",
+  "walk",
+  "car",
+  "van",
+  "bike",
+  "walk",
+  "car",
+  "van",
+  "car",
+  "truck",
+  "pogostick",
+];
+
+const transportation = data.reduce(function (obj, item) {
+  if (!obj[item]) {
+    obj[item] = 0;
+  }
+  obj[item]++;
+  console.log(item);
+  return obj;
+}, {});
+
+console.log(transportation);
